@@ -1,0 +1,52 @@
+хлебные крошки  1:45
+https://web-programming.com.ua/laravel-sozdanie-xlebnyx-kroshek/
+composer require davejamesmiller/laravel-breadcrumbs
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+        ...
+        <li class="breadcrumb-item active"><a href="{{route('about')}}">About</a></li>
+    </ul>
+
+область сообщений в лейоут
+1:55
+ flash сообщения
+@if (session('error'))
+            <div class="alert alert-error" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
+        ...
+@if (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
+
+для автоматизации крошек можно использовать пакет  2:06
+laravel-breadcrumbs
+davejamedmiller/laravel-breadcrumbs
+
+routes/breadcrumbs.php
+
+Breadcrumbs::register('home', function(BreadcrumbsGenerator $crumbs){
+    $crumbs->push('Home', route('home'));
+});
+
+Breadcrumbs::register('login', function(BreadcrumbsGenerator $crumbs){
+    $crumbs->parent('home');
+    $crumbs->push('Login', route('login'));
+});
+
+Breadcrumbs::register('password_reset', function(BreadcrumbsGenerator $crumbs){
+    $crumbs->parent('login');
+    $crumbs->push('Password Reset', route('password.email'));
+});
+
+пример рекурсивного использования 
+
+Breadcrumbs::register('adver', function(BreadcrumbsGenerator $crumbs, $advert){
+    $crumbs->parent('category',$crumbs->category);
+    $crumbs->push($advert->name, route('category.advert'));
+});

@@ -1,4 +1,12 @@
 @extends('layouts.app')
+@section('breadcrumb')
+    <!-- <ul class="breadcrumb">
+        <li class="breadcrumb-item active"><a href="{{route('home')}}">Home</a></li>
+    </ul> -->
+
+    {!! Breadcrumbs::render() !!}
+
+@endsection
 
 @section('content')
 <div class="container">
