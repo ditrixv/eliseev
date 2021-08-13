@@ -29,9 +29,13 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      #- ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      - ./docker-compose/mysql:/var/lib/mysql
     networks:
       - eliseev        
+    #ports: 
+    #  - "3306:33061"  #явно опрелелить порты, иначе будет назначен случайно
+
 
 
   nginx:
