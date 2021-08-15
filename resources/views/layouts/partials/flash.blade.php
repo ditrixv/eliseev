@@ -1,11 +1,12 @@
-@if (session('status'))
+
+        @if (session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}
             </div>
         @endif
 
         @if (session('error'))
-            <div class="alert alert-error" role="alert">
+            <div class="alert alert-danger" role="alert">
                 {{ session('error') }}
             </div>
         @endif
@@ -20,4 +21,16 @@
             <div class="alert alert-info" role="alert">
                 {{ session('info') }}
             </div>
+        @endif
+
+        @if (session('primary'))
+        <div class="alert alert-primary" role="alert">
+            {{ session('primary') }}
+        </div>
+        @endif
+
+        @if (session('warning'))
+        <div class="alert alert-warning" role="alert">
+            {{ session('warning') }}
+        </div>
         @endif

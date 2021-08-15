@@ -44,9 +44,76 @@ Breadcrumbs::register('password_reset', function(BreadcrumbsGenerator $crumbs){
     $crumbs->push('Password Reset', route('password.email'));
 });
 
-пример рекурсивного использования 
+пример рекурсивного использования
 
 Breadcrumbs::register('adver', function(BreadcrumbsGenerator $crumbs, $advert){
     $crumbs->parent('category',$crumbs->category);
     $crumbs->push($advert->name, route('category.advert'));
 });
+----------------------------------------------
+флеш сообщенния. сейчас выводятся в див на странице
+
+       @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
+...
+  @include('layouts.partials.flash')
+  ....
+  вариант
+  https://github.com/laracasts/flash
+
+davejamedmiller/laravel-breadcrumbs  смена внешн вида
+\vendor\
+
+
+  -==============
+  собственная аунтефикация 2:34
+
+
+3-12 отправка письма (подтверждение регистрации)
+можно отправлять фасадом
+
+use Illuminate\Support\Facades\Mail;
+...
+Mail::to($user->email)->send(...);
+
+можно создать свой класс для каждой сущности
+ex.  php artisan make:mail -m verify.email VerifyEmail
+namespace App\Mail;
+....
+class VerifyMail extends Mailable
+{
+    private $user;
+    public function __constructor(User $user){
+        $this->user = $user;
+    }
+
+    public function build(User $user)
+    {
+        return $this->markdown('mail.verify',[
+            'user' => $this->user,
+        ]);
+    }
+}
+
+Mail::to($user->email)->send(new VerifyMail($user));
+Mail::to($user->email)->queue(new VerifyMail($user)); вариант отправки через постиановку в очередь
+
+странно, но повсюду переопределяются методы (правда пустые) трейтов
+см.
+class LoginController extends Controller {
+    ...
+    use AuthenticatesUsers;
+    ...
+        public function authenticated(Request $request, $user){
+        if($user->status !== User::STATUS_ACTIVE){
+            $this->guard()->logout();
+            return back()->with('error','you need to confirm ypur account');
+        }
+        return redirect($this->redirectPath());
+    }
+}
+---------- 3:45
