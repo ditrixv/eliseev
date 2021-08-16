@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Entity\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\VerifyMail;
@@ -16,7 +16,7 @@ class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = '/cabinet';
+    protected $redirectTo = '/login';
 
     public function __construct()
     {
@@ -63,7 +63,7 @@ class RegisterController extends Controller
             'status' => User::STATUS_WAIT,
         ]);
 
-        Mail::fake();
+
         Mail::to($user->email)->send(new VerifyMail($user));
         //Mail::to($user->email)->queue(new VerifyMail($user)); вариант отправки через постиановку в очередь
         return $user;
@@ -73,8 +73,8 @@ class RegisterController extends Controller
     {
 
         $this->guard()->logout();
-     //   return redirect()->route('login');
-    return redirect()->route('login')
+
+        return redirect()->route('login')
                 ->with('success','check you email and verify');
     }
 
