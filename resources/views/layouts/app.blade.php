@@ -27,10 +27,10 @@
         </header>
         <main class="py-4">
             <div class="container">
-            
-            
-            {!! Breadcrumbs::render() !!}
-            
+
+
+            {{-- {!! Breadcrumbs::render() !!} --}}
+
             @include('layouts.partials.flash')
             @yield('content')
             </div>

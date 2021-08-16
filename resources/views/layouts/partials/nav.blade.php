@@ -13,6 +13,7 @@
 
                   </ul>
 
+
                   <!-- Right Side Of Navbar -->
                   <ul class="navbar-nav ml-auto">
                       <!-- Authentication Links -->
@@ -24,14 +25,22 @@
                               <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                           </li>
                       @else
-                          <li class="nav-item dropdown">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.home') }}">Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.users.index') }}">Users</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
                               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                   {{ Auth::user()->name }} <span class="caret"></span>
                               </a>
 
                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
                                   <a class="dropdown-item" href="{{ route('cabinet') }}">Cabinet</a>
-                                  <a class="dropdown-item" href="{{ route('logout') }}" 
+                                  <a class="dropdown-item" href="{{ route('logout') }}"
                                   onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">
                                       {{ __('Logout') }}
@@ -43,7 +52,7 @@
                               </div>
                           </li>
                       @endguest
-                  </ul>                  
+                  </ul>
               </div>
           </div>
     </nav>
