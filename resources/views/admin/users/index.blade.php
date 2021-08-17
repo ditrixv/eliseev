@@ -55,7 +55,7 @@
                 </div>
                 <div class="card-footer">
                     {{ $users->links() }}
-                    <a class="btn btn-info" href="{{route('admin.home')}}">Ok</a>
+
                 </div>
             </div>
         </div>

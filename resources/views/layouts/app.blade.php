@@ -25,18 +25,18 @@
         <header>
             @include('layouts.partials.nav')
         </header>
-        <main class="py-4">
+        <main class="py-4 flex-shrink-8">
             <div class="container">
 
 
-            {{-- {!! Breadcrumbs::render() !!} --}}
+            {!! Breadcrumbs::render() !!}
 
             @include('layouts.partials.flash')
             @yield('content')
             </div>
         </main>
-        <footer>
-            <div class="container">
+        <footer class="bd-footer text-muted">
+            <div class="container-fluid p-3 p-md-5">
                 <div class="border-top py-3">
                     <p>&copy; {{date('Y')}} - Adverts</p>
                 </div>
