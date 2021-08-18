@@ -25,7 +25,7 @@
         <header>
             @include('layouts.partials.nav')
         </header>
-        <main class="py-4 flex-shrink-8">
+        <main class="py-4 d-flex flex-column">
             <div class="container">
 
 

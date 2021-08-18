@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Entity\User;
+use App\Http\Requests\Admin\Users\CreateRequest;
+use App\Http\Requests\Admin\Users\UpdateRequest;
 use Faker\Guesser\Name;
 
 class UserController extends Controller
@@ -25,18 +27,13 @@ class UserController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
-        $data = $this->validate($request,[
-                'name' => 'bail|required|string|max:255',
-                'email' => 'bail|required|string|email|max:255',
-        ]);
 
         $user = User::create([
             "name"  =>  $request['name'],
             "email"  => $request['email'],
-            "status" => User::STATUS_ACTIVE,
+            "status" => User::STATUS_WAIT,
         ]);
         //return redirect()->route('admin.users.show',['user' => $user]);
         //return redirect()->route('admin.users.show',compact('user'));
@@ -53,19 +50,19 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('admin.users.edit',compact('user'));
+        $statuses = [
+            User::STATUS_WAIT => 'Waiting',
+            User::STATUS_ACTIVE => 'Active',
+        ];
+
+        return view('admin.users.edit',compact('user','statuses'));
     }
 
 
-    public function update(Request $request, User $user)
+    public function update(UpdateRequest $request, User $user)
     {
 
-        $data = $this->validate($request,[
-            'name' => 'bail|required|string|max:255',
-            'email' => 'bail|required|string|email|max:255',
-        ]);
-
-        $user->update($data);
+        $user->update($request->only(['name','email','status']));
         return redirect()->route('admin.users.index');
 
     }

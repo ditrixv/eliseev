@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('admin.users._nav')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -16,41 +17,51 @@
                 </div>
 
                 <div class="card-body">
-                    <table width="100%">
+                    <table class="table table-stripped" width="100%">
                         <thead>
                             <tr>
-                                <td width="30%">email</td>
-                                <td width="40%">name</td>
-                                <td width="10%">status</td>
-                                <td width="20%"></td>
+                                <th scope="col">#</th>
+                                <th scope="col">email</th>
+                                <th scope="col" width="40%">name</th>
+                                <th scope="col">status</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
+                        <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td width="30%">{{$user->email}}</td>
-                            <td width="40%">
+                            <th scope="row">{{$user->id}}</th>
+                            <td>{{$user->email}}</th>
+                            <td>
                                 <a href="{{'users/'.$user->id}}">
                                 {{$user->name}}
                                 </a>
                             </td>
-                            <td width="10%">{{$user->status}}</td>
-                            <td width="20%">
-                                <nav>
-                                <div  class="btn-group" role="group">
-                                    <a  class="btn btn-primary" href="{{'users/'.$user->id.'/edit'}}" >Edit</a>
-                                </div>
-                                <div  class="btn-group" role="group">
-                                    <form method="post" action="{{ route('admin.users.destroy', $user->id) }}" class="mr-1">
+                            <td>
+                                    @if($user->status === App\Entity\User::STATUS_WAIT)
+                                        <span class="badge badge-secondary">Waiting</span>
+                                    @endif
+                                    @if($user->status === App\Entity\User::STATUS_ACTIVE)
+                                    <span class="badge badge-primary">Active</span>
+                                    @endif
+
+                            </td>
+                            <td>
+                                <div  class="d-flex flex-row mb-3">
+                                    <a  class="btn btn-primary mr-1" href="{{'users/'.$user->id.'/edit'}}" >Edit</a>
+
+                                    <form method="post" action="{{ route('admin.users.update', $user->id) }}" class="mr-1">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger">Delete</button>
                                     </form>
 
                                 </div>
-                                </nav>
+
                             </td>
                         </tr>
                     @endforeach
+                        </tbody>
                     </table>
                 </div>
                 <div class="card-footer">
