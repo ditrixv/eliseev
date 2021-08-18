@@ -1,5 +1,5 @@
 после установки
-composer install --no-dev  
+composer install --no-dev
 удалит все лишнее (тестирование) для разворачивания на проде
 composer install вернет все на место ))
 параметры из composer.lock
@@ -15,4 +15,24 @@ composer install вернет все на место ))
 
     процесс работы
     index.php:  bootstrap.php (создает объект приложения) => создается ядро => обработка request response
+
+000000000000000000000000000000000000000000000000
+работа с ексепшн
+
+class MyModel extends Model
+{
+  ...
+     public function foo(){
+..
+        if($this->goo()){
+            throw new \DomainException('User already verified');  <<<<<<<<<<<<<<<<<<
+        }
+....
+class MyController extends Controller
+...
+    try{
+        $mymodel->foo();
+    }cach(\DomainException $e){
+        return redirect()->route('somepage')->with('error',$e->getMessage())
+    }
 

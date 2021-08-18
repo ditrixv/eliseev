@@ -30,17 +30,16 @@ class RegisterController extends Controller
                 ->with('error','Sorry your link cannot be identified');
         }
 
-        if($user->status !== User::STATUS_WAIT){
+        try{
+            $user->verify($token);
             return redirect()->route('login')
-                ->with('error','Sorry your email already veriffied');
+                ->with('success','your email is veriffied. You can login');
+
+        } catch(\DomainException $e ){
+            return redirect()->route('somepage')->with('error',$e->getMessage());
         }
 
-        $user->status = User::STATUS_ACTIVE;
-        $user->verify_token = null;
-        $user->save();
 
-        return redirect()->route('login')
-                ->with('success','your email is veriffied. You can login');
     }
 
     protected function validator(array $data)
@@ -55,14 +54,7 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'verify_token' => Str::random(),
-            'status' => User::STATUS_WAIT,
-        ]);
-
+        $user = User::register($data['name'],$data['email'],$data['password']);
 
         Mail::to($user->email)->send(new VerifyMail($user));
         //Mail::to($user->email)->queue(new VerifyMail($user)); вариант отправки через постиановку в очередь

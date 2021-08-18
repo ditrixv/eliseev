@@ -20,18 +20,24 @@
                         <div class="row">
                             <div class="col-4"><label for="ustatus">status:</label></div>
                             <div class="col-8">
-                                @if($user->status === App\Entity\User::STATUS_WAIT)
+                                @if($user->isWait())
                                 <span class="badge badge-secondary">Waiting</span>
                             @endif
-                            @if($user->status === App\Entity\User::STATUS_ACTIVE)
+                            @if($user->isActive())
                             <span class="badge badge-primary">Active</span>
                             @endif
                             </div>
                         </div>
                 </div>
-                <div class="card-footer">
-                    <a  class="btn btn-success" href="{{$user->id.'/edit'}}" >Edit</a>
-                    <a  class="btn btn-primary" href="{{route('admin.users.index')}}" >Cancel</a>
+                <div class="card-footer d-flex flex-row">
+                    <a  class="btn btn-success mr-1" href="{{$user->id.'/edit'}}" >Edit</a>
+                    {{-- <form method="post" action="{{ route('admin.users.update', $user->id) }}" class="mr-1">
+                        @csrf
+                        @method('UPDATE')
+                        <button class="btn btn-danger">Verify</button>
+                    </form> --}}
+
+                    <a  class="btn btn-primary mr-1" href="{{route('admin.users.index')}}" >Cancel</a>
                 </div>
             </div>
         </div>

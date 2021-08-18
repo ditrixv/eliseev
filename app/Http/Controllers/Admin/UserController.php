@@ -30,11 +30,7 @@ class UserController extends Controller
     public function store(CreateRequest $request)
     {
 
-        $user = User::create([
-            "name"  =>  $request['name'],
-            "email"  => $request['email'],
-            "status" => User::STATUS_WAIT,
-        ]);
+        $user = User::new($request['name'],$request['email']);
         //return redirect()->route('admin.users.show',['user' => $user]);
         //return redirect()->route('admin.users.show',compact('user'));
         return redirect()->route('admin.users.show',$user);
