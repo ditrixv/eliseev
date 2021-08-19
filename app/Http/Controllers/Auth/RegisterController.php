@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Entity\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Mail\VerifyMail;
-use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
+use App\UseCases\Auth\RegisterService;
+
+
 
 class RegisterController extends Controller
 {
@@ -16,8 +16,12 @@ class RegisterController extends Controller
 
     protected $redirectTo = '/login';
 
-    public function __construct()
+
+    protected $service;
+
+    public function __construct(RegisterService $service)
     {
+        $this->service = new RegisterService();
         $this->middleware('guest');
     }
 
@@ -29,7 +33,7 @@ class RegisterController extends Controller
         }
 
         try{
-            $user->verify();
+            $this->service->verify($user->id);
             return redirect()->route('login')
                 ->with('success','your email is veriffied. You can login');
 
@@ -42,11 +46,7 @@ class RegisterController extends Controller
 
     protected function register(RegisterRequest $request)
     {
-        $user = User::register($request['name'],$request['email'],$request['password']);
-
-        Mail::to($user->email)->send(new VerifyMail($user));
-        //Mail::to($user->email)->queue(new VerifyMail($user)); вариант отправки через постиановку в очередь
-        //return $this->registered();
+        $this->service->register($request);
         return redirect()->route('login')->with('success','check you email and verify');
     }
 
