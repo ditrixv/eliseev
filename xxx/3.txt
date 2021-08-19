@@ -125,3 +125,4 @@ class LoginController extends Controller {
 5-00 crud-Breadcrumbs
 5-15 формы
 5-40  тесты
+6-06 сервиссы

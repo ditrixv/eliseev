@@ -6,15 +6,13 @@ use App\Entity\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\VerifyMail;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Requests\Auth\RegisterRequest;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-    use RegistersUsers;
+   // use RegistersUsers;
 
     protected $redirectTo = '/login';
 
@@ -36,38 +34,32 @@ class RegisterController extends Controller
                 ->with('success','your email is veriffied. You can login');
 
         } catch(\DomainException $e ){
-            return redirect()->route('somepage')->with('error',$e->getMessage());
+            return redirect()->route('login')->with('error',$e->getMessage());
         }
 
 
     }
 
-    protected function validator(array $data)
+    protected function register(RegisterRequest $request)
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-    }
-
-
-    protected function create(array $data)
-    {
-        $user = User::register($data['name'],$data['email'],$data['password']);
+        $user = User::register($request['name'],$request['email'],$request['password']);
 
         Mail::to($user->email)->send(new VerifyMail($user));
         //Mail::to($user->email)->queue(new VerifyMail($user)); вариант отправки через постиановку в очередь
-        return $user;
+        //return $this->registered();
+        return redirect()->route('login')->with('success','check you email and verify');
     }
 
-    protected function registered(Request $request, $user)
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
+    protected function registered()
     {
 
-        $this->guard()->logout();
-
-        return redirect()->route('login')
-                ->with('success','check you email and verify');
+        Auth::logout();
+        return redirect()->route('login')->with('success','check you email and verify');
     }
 
 

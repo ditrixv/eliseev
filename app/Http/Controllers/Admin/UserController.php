@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Entity\User;
 use App\Http\Requests\Admin\Users\CreateRequest;
 use App\Http\Requests\Admin\Users\UpdateRequest;
-use Faker\Guesser\Name;
 
 class UserController extends Controller
 {
 
     public function index()
     {
-        //
-        $users = User::paginate(5);
+       $users = User::orderBy('id','desc')->paginate(5);
         return view('admin.users.index',compact('users'));
     }
 

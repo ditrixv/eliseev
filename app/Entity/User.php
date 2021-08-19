@@ -75,10 +75,12 @@ class User extends Authenticatable
         }
         $this->update([
             'status' => self::STATUS_ACTIVE,
-            'verify_token' => ''
+            'verify_token' => null
         ]);
 
     }
+
+
 
 
 }
