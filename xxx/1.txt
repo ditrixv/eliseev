@@ -36,3 +36,18 @@ class MyController extends Controller
         return redirect()->route('somepage')->with('error',$e->getMessage())
     }
 
+////////////////// очистка логов
+++++ routes/console.php
+Artisan::command('logs:clear', function() {
+
+    // Option 1. Empty the laravel.log file, OR
+    exec('echo "" > ' . storage_path('logs/laravel.log'));
+
+    // Option 2. Empty the logs folder
+    exec('rm ' . storage_path('logs/*'));
+
+    $this->comment('Logs have been cleared!');
+
+})->describe('Clear log files');
+
+#php artisan logs:loear
