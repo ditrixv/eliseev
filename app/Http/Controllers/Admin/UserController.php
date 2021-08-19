@@ -56,7 +56,7 @@ class UserController extends Controller
     {
 
         $user->update($request->only(['name','email','status']));
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.show',$user);
 
     }
 

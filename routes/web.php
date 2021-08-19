@@ -18,10 +18,9 @@ use App\Http\Controllers\Admin\HomeController;
 Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
+Route::get('/verify/{token}','Auth\RegisterController@verify')->name('register.verify');
 
 Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
-
-Route::get('/verify/{token}','Auth\RegisterController@verify')->name('register.verify');
 
 //Route::get('/admin', 'Admin\HomeController@index')->name('admin');
 
