@@ -29,7 +29,7 @@ class RegisterController extends Controller
         }
 
         try{
-            $user->verify($token);
+            $user->verify();
             return redirect()->route('login')
                 ->with('success','your email is veriffied. You can login');
 
