@@ -31,11 +31,11 @@
                 </div>
                 <div class="card-footer d-flex flex-row">
                     <a  class="btn btn-success mr-1" href="{{$user->id.'/edit'}}" >Edit</a>
-                    {{-- <form method="post" action="{{ route('admin.users.update', $user->id) }}" class="mr-1">
+                    <form method="post" action="{{ route('admin.users.verify', $user->id) }}" class="mr-1">
                         @csrf
-                        @method('UPDATE')
+                        {{-- @method('UPDATE') --}}
                         <button class="btn btn-danger">Verify</button>
-                    </form> --}}
+                    </form>
 
                     <a  class="btn btn-primary mr-1" href="{{route('admin.users.index')}}" >Cancel</a>
                 </div>

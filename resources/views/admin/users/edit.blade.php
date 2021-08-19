@@ -40,7 +40,7 @@
                                     <span class="invalid-feedback"><strong>{{$errors->first('name')}}</strong></span>
                                 @endif
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="ustatus">status</label>
                                 <select name="status" class="form-control" id="ustatus">
                                     @foreach ( $statuses as $value => $label )
@@ -53,7 +53,7 @@
 
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
                     <div class="card-footer" >
                         <button type="submit" class="btn btn-success">Save</button>

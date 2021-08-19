@@ -33,9 +33,7 @@
                             <th scope="row">{{$user->id}}</th>
                             <td>{{$user->email}}</th>
                             <td>
-                                <a href="{{'users/'.$user->id}}">
                                 {{$user->name}}
-                                </a>
                             </td>
                             <td>
                                     @if($user->isWait())
@@ -48,7 +46,8 @@
                             </td>
                             <td>
                                 <div  class="d-flex flex-row mb-3">
-                                    <a  class="btn btn-primary mr-1" href="{{'users/'.$user->id.'/edit'}}" >Edit</a>
+                                    <a  class="btn btn-primary mr-1" href="{{'users/'.$user->id}}" >Show</a>
+                                    <a  class="btn btn-success mr-1" href="{{'users/'.$user->id.'/edit'}}" >Edit</a>
 
                                     <form method="post" action="{{ route('admin.users.update', $user->id) }}" class="mr-1">
                                         @csrf

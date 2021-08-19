@@ -67,7 +67,7 @@ class User extends Authenticatable
         return $user;
     }
 
-    public function verify($token){
+    public function verify(){
 
 
         if($this->isActive()){
