@@ -31,7 +31,7 @@
                     @foreach ($users as $user)
                         <tr>
                             <th scope="row">{{$user->id}}</th>
-                            <td>{{$user->email}}</th>
+                            <td>{{$user->email}}</td>
                             <td>
                                 <a  href="{{'users/'.$user->id}}" >{{$user->name}}</a>
                             </td>

@@ -1,0 +1,68 @@
+fake data
+http://127.0.0.1:8000/verify/ffeb4b36-9448-427b-8fee-0bbbb846d851
+
+$factory->define(User::class, function (Faker $faker) {
+    $active = $faker->boolean;
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+        'remember_token' => str_random(10),
+        'status' => $active? User::STATUS_ACTIVE : User::STATUS_WAIT,
+//        'verify_token' => $active? Str::uuid() : null,
+//        'role' => $active ?
+    ];
+});
+================================================================================
+1:12  программируем собств консольную команду (на примере верификации юзера через php artisan)
+цель. php artisan user:verify ditrixv@ukr.net
+
+php artisan make:command User/VerifyCommand
+----------------------------------------
+роли и доступы
+
+admin manager user
+
+class SomeController extends Controller
+
+public __constructor() {
+    ...
+    middleware('can:admin')
+
+}
+
+public index(){
+    $user = Auth::user();
+    if($user->role !== 'admin'){
+        abort(403)
+    }
+}
+
+
+------------------------
+доступ ЧЕРЕЗ РОЛИ
+но если ролей много, а комбинаций бесчисленное ко-во....
+if(user){}
+if(usew || moderator || admin){}
+if(moderator||admin){}
+.....
+
+
+
+достуа ЧЕРЕЗ РАЗРЕШЕНИЯ
+             user  moderator admin
+user.index    +        +       +
+user.edit              +       +
+user.delete                    +
+
+if(user.index) {...}
+if(user.edit) {...}
+if(user.deleted)
+
+придоступе через роли менять нужно каждый if
+при доступе через разрешения меняем конфиг разрешений
+----------------
+
+03:08 управление ролями
+
+

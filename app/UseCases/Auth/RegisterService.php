@@ -13,7 +13,7 @@ class RegisterService {
 
     public function register(RegisterRequest $request ):void
     {
-        $user = User::register($request['name'],$request['email'],$request['password']);
+       $user = User::register($request['name'],$request['email'],$request['password']);
        Mail::to($user->email)->send(new VerifyMail($user));
 
     }

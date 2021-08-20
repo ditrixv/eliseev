@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
-
+use InvalidArgumentException;
 
 class User extends Authenticatable
 {
@@ -15,13 +15,16 @@ class User extends Authenticatable
 
     public const STATUS_WAIT = 'wait';
     public const STATUS_ACTIVE = 'active';
+
+    public const ROLE_USER = 'user';
+    public const ROLE_ADMIN = 'admin';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',  'verify_token', 'status',
+        'name', 'email', 'password',  'status','verify_token', 'role',
     ];
 
     /**
@@ -41,19 +44,26 @@ class User extends Authenticatable
         return $this->status === self::STATUS_ACTIVE;
     }
 
-    public static function register(string $name, string  $email, string $password)
+    public function isAdmin(){
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public static function register(string $name, string  $email, string $password = 'secret')
     {
 
         $user = static::create([
                 'name' => $name,
                 'email' => $email,
                 'password' => Hash::make($password),
-                'verify_token' => Str::random(),
+                'verify_token' => Str::uuid(),
                 'status' => User::STATUS_WAIT,
+                'role' => User::ROLE_USER,
         ]);
 
         return $user;
     }
+
+////////////////  DRY ///////////////////////////
 
     public static function new(string $name, string  $email)
     {
@@ -62,13 +72,14 @@ class User extends Authenticatable
                 'name' => $name,
                 'email' => $email,
                 'status' => User::STATUS_WAIT,
+                'password' => Hash::make('password'),
+                'role' => User::ROLE_USER,
         ]);
 
         return $user;
     }
 
     public function verify(){
-
 
         if($this->isActive()){
             throw new \DomainException('User already verified');
@@ -80,7 +91,18 @@ class User extends Authenticatable
 
     }
 
+    public function changeRole($role){
 
+        if(!\in_array($role,[self::ROLE_ADMIN,self::ROLE_USER])){
+            throw new \InvalidArgumentException('Undefined role "'.$role.'"');
+        }
+
+        if($this->role === $role){
+            throw new \InvalidArgumentException('Role is already assigned');
+        }
+
+        $this->update(['role' => $role]);
+    }
 
 
 }

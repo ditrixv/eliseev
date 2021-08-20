@@ -7,12 +7,13 @@ use App\Entity\User;
 use App\Http\Requests\Admin\Users\CreateRequest;
 use App\Http\Requests\Admin\Users\UpdateRequest;
 
+
 class UserController extends Controller
 {
 
     public function index()
     {
-       $users = User::orderBy('id','desc')->paginate(5);
+       $users = User::orderBy('id','desc')->paginate(10);
         return view('admin.users.index',compact('users'));
     }
 
@@ -27,8 +28,7 @@ class UserController extends Controller
     {
 
         $user = User::new($request['name'],$request['email']);
-        //return redirect()->route('admin.users.show',['user' => $user]);
-        //return redirect()->route('admin.users.show',compact('user'));
+
         return redirect()->route('admin.users.show',$user);
 
     }
