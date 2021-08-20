@@ -34,7 +34,14 @@
                     <form method="post" action="{{ route('admin.users.verify', $user->id) }}" class="mr-1">
                         @csrf
                         {{-- @method('UPDATE') --}}
-                        <button class="btn btn-danger">Verify</button>
+                        @if($user->isWait())
+                        <button class="btn btn-warning">Verify</button>
+                        @endif
+                    </form>
+                    <form method="post" action="{{ route('admin.users.update', $user->id) }}" class="mr-1">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger">Delete</button>
                     </form>
 
                     <a  class="btn btn-primary mr-1" href="{{route('admin.users.index')}}" >Cancel</a>

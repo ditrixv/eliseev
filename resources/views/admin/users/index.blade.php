@@ -24,7 +24,7 @@
                                 <th scope="col">email</th>
                                 <th scope="col" width="40%">name</th>
                                 <th scope="col">status</th>
-                                <th scope="col"></th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -33,7 +33,7 @@
                             <th scope="row">{{$user->id}}</th>
                             <td>{{$user->email}}</th>
                             <td>
-                                {{$user->name}}
+                                <a  href="{{'users/'.$user->id}}" >{{$user->name}}</a>
                             </td>
                             <td>
                                     @if($user->isWait())
@@ -42,20 +42,6 @@
                                     @if($user->isActive())
                                     <span class="badge badge-primary">Active</span>
                                     @endif
-
-                            </td>
-                            <td>
-                                <div  class="d-flex flex-row mb-3">
-                                    <a  class="btn btn-primary mr-1" href="{{'users/'.$user->id}}" >Show</a>
-                                    <a  class="btn btn-success mr-1" href="{{'users/'.$user->id.'/edit'}}" >Edit</a>
-
-                                    <form method="post" action="{{ route('admin.users.update', $user->id) }}" class="mr-1">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger">Delete</button>
-                                    </form>
-
-                                </div>
 
                             </td>
                         </tr>
