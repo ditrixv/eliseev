@@ -6,15 +6,42 @@ use App\Http\Controllers\Controller;
 use App\Entity\User;
 use App\Http\Requests\Admin\Users\CreateRequest;
 use App\Http\Requests\Admin\Users\UpdateRequest;
-
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-       $users = User::orderBy('id','desc')->paginate(10);
-        return view('admin.users.index',compact('users'));
+        $query= User::orderByDesc('id');
+
+        if(!empty($value = $request->get('id') ) )
+            $query->where('id', $value);
+
+        if(!empty($value = $request->get('email') ) )
+            $query->where('email', 'like','%'.$value.'%');
+
+
+
+        if(!empty($value = $request->get('name') ) )
+            $query->where('name', 'like','%'.$value.'%');
+
+
+        if(!empty($value = $request->get('status') ) )
+            $query->where('status', 'like','%'.$value.'%');
+
+        if(!empty($value = $request->get('role') ) )
+            $query->where('role', 'like','%'.$value.'%');
+
+
+
+       // $users= User::orderBy('id','desc')->paginate(10);
+
+       $users= $query->paginate(10);
+
+        $statuses = [User::STATUS_ACTIVE => 'active', User::STATUS_WAIT => 'wait'];
+        $roles = [User::ROLE_ADMIN => 'admin', User::ROLE_USER => 'user'];
+        return view('admin.users.index',compact('users','statuses','roles'));
     }
 
 
