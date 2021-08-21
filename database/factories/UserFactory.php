@@ -23,8 +23,7 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
         'verify_token' => !$active? Str::uuid() : null,
         'status' => $active? User::STATUS_ACTIVE : User::STATUS_WAIT,
-        'role' => $active? $faker->randomElement([ User::ROLE_USER,User::ROLE_ADMIN]):User::ROLE_USER,
-
-            //        'role' => $active ?
+      //  'role' => $active? $faker->randomElement([ User::ROLE_USER,User::ROLE_ADMIN]):User::ROLE_USER,
+        'role' => User::ROLE_USER,
     ];
 });

@@ -48,6 +48,10 @@ class User extends Authenticatable
         return $this->role === self::ROLE_ADMIN;
     }
 
+    public function isUser(){
+        return $this->role === self::ROLE_USER;
+    }
+
     public static function register(string $name, string  $email, string $password = 'secret')
     {
 
@@ -103,6 +107,7 @@ class User extends Authenticatable
 
         $this->update(['role' => $role]);
     }
+
 
 
 }

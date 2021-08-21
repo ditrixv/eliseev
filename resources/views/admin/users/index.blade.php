@@ -23,6 +23,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">email</th>
                                 <th scope="col" width="40%">name</th>
+                                <th scope="col">role</th>
                                 <th scope="col">status</th>
 
                             </tr>
@@ -34,6 +35,13 @@
                             <td>{{$user->email}}</td>
                             <td>
                                 <a  href="{{'users/'.$user->id}}" >{{$user->name}}</a>
+                            </td>
+                            <td>
+                                @if ($user->isAdmin())
+                                    <span class="badge badge-danger">admin</span>
+                                @else
+                                <span class="badge badge-secondary">user</span>
+                                @endif
                             </td>
                             <td>
                                     @if($user->isWait())

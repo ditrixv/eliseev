@@ -28,6 +28,17 @@
                             @endif
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-4"><label for="ustatus">role:</label></div>
+                            <div class="col-8">
+                            @if($user->isAdmin())
+                                <span class="badge badge-danger">admin</span>
+                            @endif
+                            @if($user->isUser())
+                            <span class="badge badge-secondary">user</span>
+                            @endif
+                            </div>
+                        </div>
                 </div>
                 <div class="card-footer d-flex flex-row">
                     <a  class="btn btn-success mr-1" href="{{$user->id.'/edit'}}" >Edit</a>

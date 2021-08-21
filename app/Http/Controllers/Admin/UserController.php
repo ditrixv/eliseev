@@ -45,14 +45,15 @@ class UserController extends Controller
         // $statuses = [  User::STATUS_WAIT => 'Waiting',   User::STATUS_ACTIVE => 'Active', ];
 
         // return view('admin.users.edit',compact('user','statuses'));
-        return view('admin.users.edit',['user' => $user]);
+        $roles = [User::ROLE_ADMIN => 'admin', User::ROLE_USER => 'user',];
+        return view('admin.users.edit',['user' => $user, 'roles' => $roles]);
     }
 
 
     public function update(UpdateRequest $request, User $user)
     {
 
-        $user->update($request->only(['name','email','status']));
+        $user->update($request->only(['name','email','status','role']));
         return redirect()->route('admin.users.show',$user);
 
     }

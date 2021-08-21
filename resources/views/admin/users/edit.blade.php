@@ -21,7 +21,8 @@
                                         id="uemail"
                                         value="{{old('email',$user->email)}}"
                                         name="email"
-                                        required                                >
+                                        required
+                                >
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback"><strong>{{$errors->first('email')}}</strong></span>
                                 @endif
@@ -40,20 +41,20 @@
                                     <span class="invalid-feedback"><strong>{{$errors->first('name')}}</strong></span>
                                 @endif
                             </div>
-                            {{-- <div class="form-group">
-                                <label for="ustatus">status</label>
-                                <select name="status" class="form-control" id="ustatus">
-                                    @foreach ( $statuses as $value => $label )
+                            <div class="form-group">
+                                <label for="urole">role</label>
+                                <select name="role" class="form-control" id="urole">
+                                    @foreach ( $roles as $value => $label )
                                         <option
                                             value="{{$value}}"
-                                            {{$value === old('status',$user->status)?' selected':''}}
+                                            {{$value === old('role',$user->role)?' selected':''}}
                                         >
                                             {{$label}}
                                         </option>
 
                                     @endforeach
                                 </select>
-                            </div> --}}
+                            </div>
                         </div>
                     <div class="card-footer" >
                         <button type="submit" class="btn btn-success">Save</button>
