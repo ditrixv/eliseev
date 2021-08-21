@@ -11,12 +11,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
-    //private $roles;
-
-
-	public function __construct(){
-
-        //$this->roles = [User::ROLE_ADMIN => 'admin', User::ROLE_USER => 'user', User::ROLE_MODERATOR => 'moderator'];
+  	public function __construct(){
 
         //	$this->middleware('auth'); подключено в роутах
         //$this->middleware('can:user-manager');    для примера
