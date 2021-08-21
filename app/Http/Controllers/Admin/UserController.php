@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
+
+	public function __construct(){
+        //	$this->middleware('auth'); подключено в роутах
+        //$this->middleware('can:user-manager');    для примера
+        }
+
+
     public function index(Request $request)
     {
         $query= User::orderByDesc('id');

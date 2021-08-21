@@ -68,4 +68,45 @@ if(user.deleted)
 03:08 управление ролями
 3:20 фильтрация
 3:29 роли-функционал
+-------
+на примере
+файл провайдера
+  App/Providers/AuthServiceProvider
 
+class AuthServiceProvider extends ServiceProvider
+{
+     */
+    protected $policies = [
+    ];
+    public function boot()
+    {
+        $this->registerPolicies();
+        Gate::define('admin-panel',function (User $user) {
+            return $user->isAdmin();
+        });
+        Gate::define('manager-panel',function (User $user) {
+            return $user->isAdmin() || user->isManager();
+        });
+        Gate::define('user-panel',function (User $user) {
+            return $user->isAdmin() || user->isManager() || user->isUser();
+        });
+    }
+}
+
+в контроллере
+class UserController extends Controller
+{
+	public function __construct(){
+        $this->middleware('can:user-panel');    }
+}
+
+в блейде
+    @can('admin-panel')
+        <form method="post" action="{{ route('admin.users.update', $user->id) }}" class="mr-1">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger">Delete</button>
+        </form>
+    @endcan
+
+пока гейтов мало -  в коде только @can @endcan
