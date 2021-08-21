@@ -17,17 +17,7 @@
                             <div class="col-4"><label id="uname">name:</label></div>
                             <div class="col-8"><strong>{{$user->name}}</strong></div>
                         </div>
-                        <div class="row">
-                            <div class="col-4"><label for="ustatus">status:</label></div>
-                            <div class="col-8">
-                                @if($user->isWait())
-                                <span class="badge badge-secondary">Waiting</span>
-                            @endif
-                            @if($user->isActive())
-                            <span class="badge badge-primary">Active</span>
-                            @endif
-                            </div>
-                        </div>
+
                         <div class="row">
                             <div class="col-4"><label for="ustatus">role:</label></div>
                             <div class="col-8">
@@ -36,6 +26,20 @@
                             @endif
                             @if($user->isUser())
                             <span class="badge badge-secondary">user</span>
+                            @endif
+                            @if($user->isModerator())
+                            <span class="badge badge-success">moderator</span>
+                            @endif
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"><label for="ustatus">status:</label></div>
+                            <div class="col-8">
+                                @if($user->isWait())
+                                <span class="badge badge-secondary">Waiting</span>
+                            @endif
+                            @if($user->isActive())
+                            <span class="badge badge-primary">Active</span>
                             @endif
                             </div>
                         </div>

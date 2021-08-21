@@ -110,3 +110,5 @@ class UserController extends Controller
     @endcan
 
 пока гейтов мало -  в коде только @can @endcan
+============================================================
+регионы

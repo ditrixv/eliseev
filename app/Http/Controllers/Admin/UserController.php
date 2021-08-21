@@ -11,11 +11,16 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
+    //private $roles;
+
 
 	public function __construct(){
+
+        //$this->roles = [User::ROLE_ADMIN => 'admin', User::ROLE_USER => 'user', User::ROLE_MODERATOR => 'moderator'];
+
         //	$this->middleware('auth'); подключено в роутах
         //$this->middleware('can:user-manager');    для примера
-        }
+    }
 
 
     public function index(Request $request)
@@ -27,8 +32,6 @@ class UserController extends Controller
 
         if(!empty($value = $request->get('email') ) )
             $query->where('email', 'like','%'.$value.'%');
-
-
 
         if(!empty($value = $request->get('name') ) )
             $query->where('name', 'like','%'.$value.'%');
@@ -47,7 +50,8 @@ class UserController extends Controller
        $users= $query->paginate(10);
 
         $statuses = [User::STATUS_ACTIVE => 'active', User::STATUS_WAIT => 'wait'];
-        $roles = [User::ROLE_ADMIN => 'admin', User::ROLE_USER => 'user'];
+
+        $roles = User::roles();
         return view('admin.users.index',compact('users','statuses','roles'));
     }
 
@@ -76,10 +80,8 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        // $statuses = [  User::STATUS_WAIT => 'Waiting',   User::STATUS_ACTIVE => 'Active', ];
 
-        // return view('admin.users.edit',compact('user','statuses'));
-        $roles = [User::ROLE_ADMIN => 'admin', User::ROLE_USER => 'user',];
+        $roles = User::roles();
         return view('admin.users.edit',['user' => $user, 'roles' => $roles]);
     }
 

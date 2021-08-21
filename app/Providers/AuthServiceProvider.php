@@ -30,5 +30,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin-panel',function (User $user) {
             return $user->isAdmin();
         });
+
+        // пример для менеджера
+        Gate::define('manager-panel',function (User $user) {
+            return $user->isAdmin() || $user->isManager();
+        });
+
+
     }
 }

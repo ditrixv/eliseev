@@ -88,19 +88,23 @@
                                 <a  href="{{'users/'.$user->id}}" >{{$user->name}}</a>
                             </td>
                             <td>
-                                @if ($user->isAdmin())
-                                    <span class="badge badge-danger">admin</span>
-                                @else
+                                @if($user->isAdmin())
+                                <span class="badge badge-danger">admin</span>
+                                @endif
+                                @if($user->isUser())
                                 <span class="badge badge-secondary">user</span>
+                                @endif
+                                @if($user->isModerator())
+                                <span class="badge badge-success">moderator</span>
                                 @endif
                             </td>
                             <td>
-                                    @if($user->isWait())
-                                        <span class="badge badge-secondary">Waiting</span>
-                                    @endif
-                                    @if($user->isActive())
+                                @if($user->isWait())
+                                    <span class="badge badge-secondary">Waiting</span>
+                                @endif
+                                @if($user->isActive())
                                     <span class="badge badge-primary">Active</span>
-                                    @endif
+                                @endif
 
                             </td>
                         </tr>
