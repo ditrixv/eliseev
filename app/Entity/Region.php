@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use InvalidArgumentException;
 
-class Regions extends Model {
+class Region extends Model {
 
     protected $fillable = ['name', 'slag', 'parent_id' ];
 

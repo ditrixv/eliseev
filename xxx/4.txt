@@ -155,4 +155,7 @@ slug (униклен в рамках parent_id)
                                         }));
                     });
     }
-    #php artisan db:seed --class=RegionTableSeeder
+    #php artisan db:seed -- class=RegionTableSeeder
+-----------
+
+0:50 работа с кодом
