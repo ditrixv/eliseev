@@ -112,3 +112,47 @@ class UserController extends Controller
 пока гейтов мало -  в коде только @can @endcan
 ============================================================
 регионы
+id
+parent_id
+name
+slug (униклен в рамках parent_id)
+
+    public function up()
+    {
+        Schema::create('regions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->index();
+            $table->string('slug');
+
+            $table->integer('parent_id')->nullable()->references('id')->on('regions')->onDelete('CASCADE');
+
+            $table->timestamps();
+
+            $table->unique(['parent_id','slug']);  // умное ограничение (только на для parent_id !== NULL)
+            $table->unique(['parent_id','name']);
+        });
+    }
+
+
+создание 3-x этажей регионов
+    public function run()
+    {
+        // создание 3-х этажей региогов
+        factory(Region::class,10)
+            ->create()
+                ->each(
+                    function (Region $region)
+                    {
+                        $region->children()->saveMany(
+                            factory(Region::class,random_int(2,10))
+                                ->create()
+                                    ->each(
+                                        function (Region $region)
+                                        {
+                                            $region->children()->saveMany(
+                                                factory(Region::class,random_int(2,10))
+                                                    ->make());
+                                        }));
+                    });
+    }
+    #php artisan db:seed --class=RegionTableSeeder

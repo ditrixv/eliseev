@@ -1,3 +1,4 @@
+ =========== разного рода офтопы ==================
 после установки
 composer install --no-dev
 удалит все лишнее (тестирование) для разворачивания на проде
@@ -52,3 +53,10 @@ Artisan::command('logs:clear', function() {
 
 #php artisan logs:loear
 
+по миграциям
+offtop:
+если хотим не использовать timestamps() в модели нужно прописать public $timestamps = false;  иначе ларавель не позволит
+
+NB!NB!NB!NB!NB!NB!NB!NB!NB!NB!NB!NB!NB!NB!NB!NB!NB!NB!NB!NB!
+сидеры создаются только артисаном
+#php artisan make:seeder ProductTableSeeder
