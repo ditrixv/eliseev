@@ -35,6 +35,7 @@ Route::group(
         Route::get('/','HomeController@index')->name('home');
         Route::resource('users','UserController');
         Route::post('/users/{user}/verify','UserController@verify')->name('users.verify');
+        Route::resource('regions','RegionController');
     }
 );
 

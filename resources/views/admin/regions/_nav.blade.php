@@ -1,13 +1,13 @@
+
 <ul class="nav nav-tabs">
 
     <li class="nav-item">
-        <a class="nav-link active" href="{{ route('admin.home') }}">Dashboard</a>
-    </li>
+        <a class="nav-link " href="{{ route('admin.home') }}">Dashboard</a>
 
+    </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.regions.index') }}">Regions</a>
+        <a class="nav-link active" href="{{ route('admin.regions.index') }}">Regions</a>
     </li>
-
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.users.index') }}">Users</a>
 

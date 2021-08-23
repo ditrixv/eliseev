@@ -13,17 +13,18 @@ use InvalidArgumentException;
 
 class Region extends Model {
 
-    protected $fillable = ['name', 'slag', 'parent_id' ];
+    protected $fillable = ['name', 'slug', 'parent_id' ];
 
 
     public function parent()
     {
-        $this->belongsTo(static::class, 'parent_id', 'id');
+        return $this->belongsTo(static::class, 'parent_id', 'id');
+
     }
 
     public function children()
     {
-        $this->hasMany(static::class,'parent_id','id');
+        return $this->hasMany(static::class,'parent_id','id');
     }
 
 

@@ -1,6 +1,8 @@
 <?php
 
 use App\Entity\User;
+use App\Entity\Region;
+
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
@@ -55,4 +57,26 @@ Breadcrumbs::register('admin.users.edit', function(BreadcrumbsGenerator $crumbs,
 Breadcrumbs::register('admin.users.index', function(BreadcrumbsGenerator $crumbs){
     $crumbs->parent('admin.home');
     $crumbs->push('Users', route('admin.users.index'));
+});
+
+//////////////////
+
+Breadcrumbs::register('admin.regions.create', function(BreadcrumbsGenerator $crumbs){
+    $crumbs->parent('admin.regions.index');
+    $crumbs->push('Create', route('admin.regions.create'));
+});
+
+Breadcrumbs::register('admin.regions.show', function(BreadcrumbsGenerator $crumbs, Region $region){
+    $crumbs->parent('admin.regions.index');
+    $crumbs->push($region->name, route('admin.regions.show',$region->id));
+});
+
+Breadcrumbs::register('admin.regions.edit', function(BreadcrumbsGenerator $crumbs, Region $region){
+    $crumbs->parent('admin.regions.index');
+    $crumbs->push($region->name, route('admin.users.edit', $region->id));
+});
+
+Breadcrumbs::register('admin.regions.index', function(BreadcrumbsGenerator $crumbs){
+    $crumbs->parent('admin.home');
+    $crumbs->push('Regions', route('admin.regions.index'));
 });
