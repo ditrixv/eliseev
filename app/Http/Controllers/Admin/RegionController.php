@@ -22,8 +22,8 @@ class RegionController extends Controller
     {
 
         $parent = null;
-        if($request->get('parent_id')){
-            $parent = Region::findOrFail($request->get('parent_id'));
+        if($request->get('parent')){
+            $parent = Region::findOrFail($request->get('parent'));
         }
 
         return view('admin.regions.create',compact('parent'));

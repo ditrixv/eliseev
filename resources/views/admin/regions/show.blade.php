@@ -38,7 +38,7 @@
                         @endif
 
                         <div class="form-group">
-                        <a  class="btn btn-primary mr-1" href="{{route('admin.regions.create',['parent_id' => $region->id])}}" >Create</a>
+                        <a  class="btn btn-primary mr-1" href="{{route('admin.regions.create',['parent' => $region->id])}}" >Create</a>
                         </div>
 
                     <table class="table table-stripped" width="100%">
