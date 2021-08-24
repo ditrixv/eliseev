@@ -155,7 +155,7 @@ slug (униклен в рамках parent_id)
                                         }));
                     });
     }
-    #php artisan db:seed -- class=RegionTableSeeder
+    #php artisan db:seed --ssclass=RegionTableSeeder
 -----------
 
 0:50 работа с кодом
@@ -163,4 +163,46 @@ regions.crud
 1:00
 иерархия
 
-11:16
+11:16 варианты
+1 (parent_id) рекурсия для иерархий
+or
+2 nested-sets
+https://devacademy.ru/article/nested-set/
+
+https://github.com/etrepat/baum  lara5 only
+
+https://github.com/lazychaser/laravel-nestedset  << HERE
+
+
+composer require kalnoy/nestedset
+
+!! 2:12 реализация ()
+фейковые даные
+
+$factory->define(Category::class, function (Faker $faker) {
+    $active = $faker->boolean;
+    return [
+        'name' => $faker->unique()->name,
+        'slug' => $faker->unique()->slug(2),
+        'parent_id' => null
+    ];
+});
+class AdvertCategoriesTableSeeder extends Seeder
+{
+    public function run(): void
+    {
+        factory(Category::class, 10)->create()->each(function(Category $category) {
+            $counts = [0, random_int(3, 7)];
+            $category->children()->saveMany(factory(Category::class, $counts[array_rand($counts)])->create()->each(function(Category $category) {
+                $counts = [0, random_int(3, 7)];
+                $category->children()->saveMany(factory(Category::class, $counts[array_rand($counts)])->create());
+            }));
+        });
+    }
+}
+
+NB! сидер создаем артисаном а не копирование
+php artisan make::seeder --class=MyClass
+!!!! данные прописываются в
+vendor\composer\autoload_classmap.php
+vendor\composer\autoload_static.php
