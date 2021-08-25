@@ -88,4 +88,46 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->route('admin.adverts.categories.index');
     }
+
+    public function first($id){
+
+        $category = Category::findOrFail($id);
+        if($first = $category->siblings()->defaultOrder()->first()){
+            $category->insertBeforeNode($first);
+        }
+
+
+        return redirect()->route('admin.adverts.categories.index');
+    }
+
+    public function up($id){
+
+        $category = Category::findOrFail($id);
+        $category->up();  // метод прямо из тейта из библиотеки
+
+        return redirect()->route('admin.adverts.categories.index');
+    }
+
+
+
+    public function down($id){
+        $category = Category::findOrFail($id);
+        $category->down();  // метод прямо из тейта из библиотеки
+
+        return redirect()->route('admin.adverts.categories.index');
+    }
+
+    public function last($id){
+
+
+        $category = Category::findOrFail($id);
+        if($last = $category->siblings()->defaultOrder('desc')->first()){
+            $category->insertAfterNode($last);
+        }
+
+        return redirect()->route('admin.adverts.categories.index');
+    }
+
+
+
 }
