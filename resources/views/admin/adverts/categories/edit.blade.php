@@ -43,6 +43,25 @@
                                 @endif
                             </div>
 
+                            <div class="form-group">
+                                <label for="uparent">parent category</label>
+                                <select name="parent" class="form-control" id="cparent">
+                                
+                                    @foreach ( $parents as $parent)
+                                        <option
+                                            value="{{$parent->id}}" {{$parent->id === old('parent')?' selected':''}}>
+                                           
+                                            @for ($i = 0; $i < $parent->depth; $i++)
+                                              &mdash;
+                                            @endfor
+                                            {{$parent->name}}
+                                        </option>
+    
+                                    @endforeach
+                                </select>  
+                            </div>                            
+
+
                         </div>
                     <div class="card-footer" >
                         <button type="submit" class="btn btn-success">Save</button>

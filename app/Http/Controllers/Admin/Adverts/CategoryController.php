@@ -7,11 +7,7 @@ use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
@@ -19,11 +15,6 @@ class CategoryController extends Controller
         return view('admin.adverts.categories.index',compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
@@ -31,14 +22,9 @@ class CategoryController extends Controller
         return view('admin.adverts.categories.create',compact('parents'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+
 
         $this->validate($request,[
             'name' => 'bail|required|string',
@@ -54,31 +40,17 @@ class CategoryController extends Controller
         return redirect()->route('admin.adverts.categories.show',$category);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Category $category)
     {
         //
-      //  $category = Category::find($id);
-        //dd($category->name);
-
         return view('admin.adverts.categories.show',compact('category'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Category $category)
     {
         //
-        return view('admin.adverts.categories.edit',compact('category'));
+        $parents = Category::defaultOrder()->withDepth()->get();
+        return view('admin.adverts.categories.edit',compact('category','parents'));
     }
 
 
@@ -110,8 +82,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('admin.adverts.categories.index');
     }
 }
