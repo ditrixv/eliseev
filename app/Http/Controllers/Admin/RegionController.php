@@ -70,7 +70,7 @@ class RegionController extends Controller
 
         $this->validate($request,[
             'name' => 'bail|required|string',
-            'slag' => 'bail|required|string',
+            'slug' => 'bail|required|string',
         ]);
 
         $region->update([

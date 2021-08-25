@@ -12,5 +12,9 @@
         <a class="nav-link" href="{{ route('admin.users.index') }}">Users</a>
 
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.adverts.categories.index') }}">Categories</a>
+
+    </li>
 </ul>
 <br />

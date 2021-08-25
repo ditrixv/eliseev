@@ -1,0 +1,40 @@
++--------+-----------+------------------------------------------+----------------------------------+------------------------------------------------------------------------+--------------------------+
+| Domain | Method    | URI                                      | Name                             | Action                                                                 | Middleware               |
++--------+-----------+------------------------------------------+----------------------------------+------------------------------------------------------------------------+--------------------------+
+|        | GET|HEAD  | /                                        | home                             | App\Http\Controllers\HomeController@index                              | web                      |
+|        | GET|HEAD  | admin                                    | admin.home                       | App\Http\Controllers\Admin\HomeController@index                        | web,auth,can:admin-panel |
+|        | POST      | admin/adverts/categories                 | admin.adverts.categories.store   | App\Http\Controllers\Admin\Adverts\CategoryController@store            | web,auth                 |
+|        | GET|HEAD  | admin/adverts/categories                 | admin.adverts.categories.index   | App\Http\Controllers\Admin\Adverts\CategoryController@index            | web,auth                 |
+|        | GET|HEAD  | admin/adverts/categories/create          | admin.adverts.categories.create  | App\Http\Controllers\Admin\Adverts\CategoryController@create           | web,auth                 |
+|        | DELETE    | admin/adverts/categories/{category}      | admin.adverts.categories.destroy | App\Http\Controllers\Admin\Adverts\CategoryController@destroy          | web,auth                 |
+|        | PUT|PATCH | admin/adverts/categories/{category}      | admin.adverts.categories.update  | App\Http\Controllers\Admin\Adverts\CategoryController@update           | web,auth                 |
+|        | GET|HEAD  | admin/adverts/categories/{category}      | admin.adverts.categories.show    | App\Http\Controllers\Admin\Adverts\CategoryController@show             | web,auth                 |
+|        | GET|HEAD  | admin/adverts/categories/{category}/edit | admin.adverts.categories.edit    | App\Http\Controllers\Admin\Adverts\CategoryController@edit             | web,auth                 |
+|        | GET|HEAD  | admin/regions                            | admin.regions.index              | App\Http\Controllers\Admin\RegionController@index                      | web,auth                 |
+|        | POST      | admin/regions                            | admin.regions.store              | App\Http\Controllers\Admin\RegionController@store                      | web,auth                 |
+|        | GET|HEAD  | admin/regions/create                     | admin.regions.create             | App\Http\Controllers\Admin\RegionController@create                     | web,auth                 |
+|        | DELETE    | admin/regions/{region}                   | admin.regions.destroy            | App\Http\Controllers\Admin\RegionController@destroy                    | web,auth                 |
+|        | PUT|PATCH | admin/regions/{region}                   | admin.regions.update             | App\Http\Controllers\Admin\RegionController@update                     | web,auth                 |
+|        | GET|HEAD  | admin/regions/{region}                   | admin.regions.show               | App\Http\Controllers\Admin\RegionController@show                       | web,auth                 |
+|        | GET|HEAD  | admin/regions/{region}/edit              | admin.regions.edit               | App\Http\Controllers\Admin\RegionController@edit                       | web,auth                 |
+|        | GET|HEAD  | admin/users                              | admin.users.index                | App\Http\Controllers\Admin\UserController@index                        | web,auth                 |
+|        | POST      | admin/users                              | admin.users.store                | App\Http\Controllers\Admin\UserController@store                        | web,auth                 |
+|        | GET|HEAD  | admin/users/create                       | admin.users.create               | App\Http\Controllers\Admin\UserController@create                       | web,auth                 |
+|        | GET|HEAD  | admin/users/{user}                       | admin.users.show                 | App\Http\Controllers\Admin\UserController@show                         | web,auth                 |
+|        | PUT|PATCH | admin/users/{user}                       | admin.users.update               | App\Http\Controllers\Admin\UserController@update                       | web,auth                 |
+|        | DELETE    | admin/users/{user}                       | admin.users.destroy              | App\Http\Controllers\Admin\UserController@destroy                      | web,auth                 |
+|        | GET|HEAD  | admin/users/{user}/edit                  | admin.users.edit                 | App\Http\Controllers\Admin\UserController@edit                         | web,auth                 |
+|        | POST      | admin/users/{user}/verify                | admin.users.verify               | App\Http\Controllers\Admin\UserController@verify                       | web,auth                 |
+|        | GET|HEAD  | api/user                                 |                                  | Closure                                                                | api,auth:api             |
+|        | GET|HEAD  | cabinet                                  | cabinet                          | App\Http\Controllers\Cabinet\HomeController@index                      | web,auth                 |
+|        | POST      | login                                    |                                  | App\Http\Controllers\Auth\LoginController@login                        | web,guest                |
+|        | GET|HEAD  | login                                    | login                            | App\Http\Controllers\Auth\LoginController@showLoginForm                | web,guest                |
+|        | POST      | logout                                   | logout                           | App\Http\Controllers\Auth\LoginController@logout                       | web                      |
+|        | POST      | password/email                           | password.email                   | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail  | web,guest                |
+|        | POST      | password/reset                           |                                  | App\Http\Controllers\Auth\ResetPasswordController@reset                | web,guest                |
+|        | GET|HEAD  | password/reset                           | password.request                 | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm | web,guest                |
+|        | GET|HEAD  | password/reset/{token}                   | password.reset                   | App\Http\Controllers\Auth\ResetPasswordController@showResetForm        | web,guest                |
+|        | POST      | register                                 |                                  | App\Http\Controllers\Auth\RegisterController@register                  | web,guest                |
+|        | GET|HEAD  | register                                 | register                         | App\Http\Controllers\Auth\RegisterController@showRegistrationForm      | web,guest                |
+|        | GET|HEAD  | verify/{token}                           | register.verify                  | App\Http\Controllers\Auth\RegisterController@verify                    | web,guest                |
++--------+-----------+------------------------------------------+----------------------------------+------------------------------------------------------------------------+--------------------------+

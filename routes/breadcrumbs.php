@@ -1,5 +1,6 @@
 <?php
 
+use App\Entity\Adverts\Category;
 use App\Entity\User;
 use App\Entity\Region;
 
@@ -80,3 +81,27 @@ Breadcrumbs::register('admin.regions.index', function(BreadcrumbsGenerator $crum
     $crumbs->parent('admin.home');
     $crumbs->push('Regions', route('admin.regions.index'));
 });
+
+//////////////////
+
+Breadcrumbs::register('admin.adverts.categories.create', function(BreadcrumbsGenerator $crumbs){
+    $crumbs->parent('admin.adverts.categories.index');
+    $crumbs->push('Create', route('admin.adverts.categories.create'));
+});
+
+Breadcrumbs::register('admin.adverts.categories.show', function(BreadcrumbsGenerator $crumbs, Category $category){
+    $crumbs->parent('admin.adverts.categories.index');
+    $crumbs->push($category->name, route('admin.adverts.categories.show',$category->id));
+});
+
+Breadcrumbs::register('admin.adverts.categories.edit', function(BreadcrumbsGenerator $crumbs, Category $category){
+    $crumbs->parent('admin.adverts.categories.index');
+    $crumbs->push($category->name, route('admin.adverts.categories.edit', $category->id));
+});
+
+Breadcrumbs::register('admin.adverts.categories.index', function(BreadcrumbsGenerator $crumbs){
+    $crumbs->parent('admin.home');
+    $crumbs->push('Cetegories', route('admin.adverts.categories.index'));
+});
+
+

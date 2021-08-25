@@ -206,3 +206,23 @@ php artisan make::seeder --class=MyClass
 !!!! данные прописываются в
 vendor\composer\autoload_classmap.php
 vendor\composer\autoload_static.php
+
+--- 20:16
+контроллер дерева категорий !!!
+пример
+
+class Category extends Model
+{
+    use NodeTrait;   << библиотека
+    ...
+}
+
+
+class CategoryController extends Controller
+{
+    public function index()
+    {
+        $categories = Category::defaultOrder()->withDept()->get();
+        return view('admin.adverts.categories.index',compact('categories'));
+    }
+.. withDept (глубина - вычисляемое при выборке поле, используем при отображении)
