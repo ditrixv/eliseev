@@ -71,6 +71,7 @@ class CategoryController extends Controller
         $category->update([
             'name' => $request['name'],
             'slug' => $request['slug'],
+            'parent_id' => $request['parent'],
         ]);
 
         return redirect()->route('admin.adverts.categories.show',$category);

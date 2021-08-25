@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <form method="POST" action={{route('admin.adverts.categories.store')}}  enctype="multipart/form-data" >
+                <form method="POST" action={{route('admin.adverts.categories.store')}} >
                     @csrf
                     <div class="card-header">create category</div>
                         <div class="card-body">
