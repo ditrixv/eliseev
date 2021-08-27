@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin\Adverts;
+
 use App\Entity\Adverts\Category;
+use App\Entity\Adverts\Atribute;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -43,24 +45,23 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
-        return view('admin.adverts.categories.show',compact('category'));
+        // $atributes = $category->atributes()->orderBy('sort')->get();
+        // return view('admin.adverts.categories.show',compact('category','atributes'));
+        $attributes = $category->attributes();
+        return view('admin.adverts.categories.show',compact('category','attributes'));
     }
 
     public function edit(Category $category)
     {
         //
+        // $atributes = $category->atributes()->orderBy('sort')->get();
+        // return view('admin.adverts.categories.edit',compact('category','atributes'));
         $parents = Category::defaultOrder()->withDepth()->get();
         return view('admin.adverts.categories.edit',compact('category','parents'));
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Category $category)
     {
         $this->validate($request,[

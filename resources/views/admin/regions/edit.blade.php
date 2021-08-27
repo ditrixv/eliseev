@@ -41,12 +41,6 @@
                     </div>
 
 
-{{--
-                        <div class="row" for="rslug">
-                            <div class="col-4"><label id="rslug">parent:</label></div>
-                            <div class="col-8"><strong>{{$region->parent_id}}</strong></div>
-
-                        </div>  --}}
                 </div>
                 <div class="card-footer d-flex flex-row">
                     <button type="submit" class="btn btn-success mr-1">Save</button>

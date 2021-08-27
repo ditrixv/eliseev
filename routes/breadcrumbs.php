@@ -1,6 +1,7 @@
 <?php
 
 use App\Entity\Adverts\Category;
+use App\Entity\Adverts\Attribute;
 use App\Entity\User;
 use App\Entity\Region;
 
@@ -104,4 +105,14 @@ Breadcrumbs::register('admin.adverts.categories.index', function(BreadcrumbsGene
     $crumbs->push('Cetegories', route('admin.adverts.categories.index'));
 });
 
+
+
+
+/////////
+
+Breadcrumbs::register('admin.adverts.categories.attributes.create', function (BreadcrumbsGenerator $crumbs, $id) {
+    $category = Category::findOrFail($id);
+    $crumbs->parent('admin.adverts.categories.show',$category);
+    $crumbs->push('Create', route('admin.adverts.categories.attributes.create', $category->id));
+});
 

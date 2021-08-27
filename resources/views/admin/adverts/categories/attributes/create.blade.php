@@ -2,17 +2,17 @@
 
 @section('content')
 @include('admin.adverts.categories._nav')
-
+bla  {{$category->name}} bla
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <form method="POST" action={{route('admin.adverts.categories.store')}} >
+                <form method="POST" action={{route('admin.adverts.categories.attributes.store',$category->id)}} >
                     @csrf
-                    <div class="card-header">create category</div>
+                    <div class="card-header">create attribuye</div>
                         <div class="card-body">
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="cname">name</label>
                                 <input type="text"
                                     class="form-control {{$errors->has('name')?' is-invalid': ''}}"
@@ -54,7 +54,7 @@
     
                                     @endforeach
                                 </select>  
-                            </div>
+                            </div> --}}
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success mr-1">Create</button>
@@ -70,6 +70,4 @@
         </div>
     </div>
 </div>
-
 @endsection
-

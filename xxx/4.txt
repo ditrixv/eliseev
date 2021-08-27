@@ -228,3 +228,37 @@ class CategoryController extends Controller
 .. withDept (глубина - вычисляемое при выборке поле, используем при отображении)
 
 2:37 сортировка дерева
+
+устанавливаем в проект фонт-авесом
+
+docker-compose exec app yarn add -s -dev font-awesome
+
+3:14  атрибуты категорий
+    атрибуты не есть отдльный круд. только в связке с категорией
+нужны роуты (напр редактирование)
+редактирование категории /categories/{category}/edit
+редактирование атрибута /categories/{category}/attributes/{attribute}/edit
+
+-----
+параметр
+ protected $casts
+определяет какого типа поле достается из бд
+напр.
+
+  $table->json('variants');
+
+protected $casts = [
+    'variants' => 'array'
+];
+
+т.о. json <-> arr <-> json   для бд  лара сделает сама
+не работает Eloquent
+извращаюсь
+
+Breadcrumbs::register('admin.adverts.categories.attributes.create', function (BreadcrumbsGenerator $crumbs, $id) {
+    $category = Category::findOrFail($id);
+    $crumbs->parent('admin.adverts.categories.show',$category);
+    $crumbs->push('Create', route('admin.adverts.categories.attributes.create', $category->id));
+});
+
+

@@ -40,10 +40,14 @@ Route::group(
         Route::group(['prefix' => 'adverts', 'as' => 'adverts.', 'namespace' => 'Adverts'],function(){
             Route::resource('categories','CategoryController');
 
-            Route::post('/categories/{categry}/first','CategoryController@first')->name('categories.first');
-            Route::post('/categories/{categry}/last','CategoryController@last')->name('categories.last');
-            Route::post('/categories/{categry}/up','CategoryController@up')->name('categories.up');
-            Route::post('/categories/{categry}/down','CategoryController@down')->name('categories.down');
+            Route::group(['prefix' => 'categories/{categry}', 'as' => 'categories.'], function(){
+                Route::post('/first','CategoryController@first')->name('first');
+                Route::post('/last','CategoryController@last')->name('last');
+                Route::post('/up','CategoryController@up')->name('up');
+                Route::post('/down','CategoryController@down')->name('down');
+                Route::resource('/attributes','AttributeController')->except('index');
+
+            });
 
         });
 

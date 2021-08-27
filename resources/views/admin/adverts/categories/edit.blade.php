@@ -65,7 +65,7 @@
                         </div>
                     <div class="card-footer" >
                         <button type="submit" class="btn btn-success">Save</button>
-                        <a  class="btn btn-primary" href="{{route('admin.adverts.categories.index')}}" >Cancel</a>
+                        
                     </div>
                 </form>
             </div>

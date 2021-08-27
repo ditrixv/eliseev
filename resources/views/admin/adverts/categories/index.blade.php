@@ -20,19 +20,19 @@
                     <div class=" d-flex flex-row">
                         <form method="post" action="{{ route('admin.adverts.categories.first', $category->id) }}" class="mr-1">
                             @csrf
-                            <button class="btn btn-sm btn-outline-primary">first</button>
+                            <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-up"></span></button>
                         </form>    
                         <form method="post" action="{{ route('admin.adverts.categories.up', $category) }}" class="mr-1">
                             @csrf
-                            <button class="btn btn-sm btn-outline-primary">up</button>
+                            <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-up"></span></button>
                         </form>                              
                         <form method="post" action="{{ route('admin.adverts.categories.down', $category) }}" class="mr-1">
                             @csrf
-                            <button class="btn btn-sm btn-outline-primary">down</button>
+                            <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-down"></span></button>
                         </form>                                                      
                         <form method="post" action="{{ route('admin.adverts.categories.last', $category) }}" class="mr-1">
                             @csrf
-                            <button class="btn btn-sm btn-outline-primary">last</button>
+                            <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-down"></span></button>
                         </form>                                                      
                     </div>    
                 </td>    

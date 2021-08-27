@@ -46,7 +46,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">name</th>
-                                <th scope="col" >slag</th>
+                                <th scope="col" >slug</th>
                             </tr>
                         </thead>
                         <tbody>
