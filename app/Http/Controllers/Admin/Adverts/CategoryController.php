@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Admin\Adverts;
 
 use App\Entity\Adverts\Category;
-use App\Entity\Adverts\Atribute;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+
+    }
 
     public function index()
     {
@@ -45,9 +49,10 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
-        // $atributes = $category->atributes()->orderBy('sort')->get();
+
+         $attributes = $category->attributes()->orderBy('sort')->get();
         // return view('admin.adverts.categories.show',compact('category','atributes'));
-        $attributes = $category->attributes();
+        //$attributes = $category->attributes();
         return view('admin.adverts.categories.show',compact('category','attributes'));
     }
 
@@ -86,6 +91,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+
         $category->delete();
         return redirect()->route('admin.adverts.categories.index');
     }
@@ -101,10 +107,12 @@ class CategoryController extends Controller
         return redirect()->route('admin.adverts.categories.index');
     }
 
-    public function up($id){
+    public function up($id)
+    //public function up(Category $category)  так не работает. возможно имена таблиц в бд
+    {
 
-        $category = Category::findOrFail($id);
-        $category->up();  // метод прямо из тейта из библиотеки
+         $category = Category::findOrFail($id);
+         $category->up();  // метод прямо из тейта из библиотеки
 
         return redirect()->route('admin.adverts.categories.index');
     }

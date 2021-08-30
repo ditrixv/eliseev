@@ -7,9 +7,14 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class Category extends Model
 {
+
+
     use NodeTrait;
 
     protected $table = 'advert_categories';
+
+
+
 
     public $timestamps = false;
 

@@ -2,10 +2,7 @@
 @section('content')
 @include('admin.adverts.categories._nav')
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+     
                 <div class="card-header d-flex flex-row">
                     <a  class="btn btn-success mr-1" href="{{$category->id.'/edit'}}" >Edit</a>
                     <form method="post" action="{{ route('admin.adverts.categories.update', $category->id) }}" class="mr-1">
@@ -17,8 +14,7 @@
 
                 </div>
 
-                <div class="card-body">
-
+     
                         <div class="row" for="rname">
                             <div class="col-4"><label id="rname">name:</label></div>
                             <div class="col-8"><strong>{{$category->name}}</strong></div>
@@ -57,12 +53,5 @@
                                 <tr></tr>
                             </tbody>
                         </table>
-                </div>
 
-                <div class="card-footer d-flex flex-row">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

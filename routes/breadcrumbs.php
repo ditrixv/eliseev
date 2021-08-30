@@ -113,6 +113,30 @@ Breadcrumbs::register('admin.adverts.categories.index', function(BreadcrumbsGene
 Breadcrumbs::register('admin.adverts.categories.attributes.create', function (BreadcrumbsGenerator $crumbs, $id) {
     $category = Category::findOrFail($id);
     $crumbs->parent('admin.adverts.categories.show',$category);
-    $crumbs->push('Create', route('admin.adverts.categories.attributes.create', $category->id));
+    $crumbs->push('Create attribute', route('admin.adverts.categories.attributes.create', $category->id));
 });
 
+
+
+Breadcrumbs::register('admin.adverts.categories.attributes.show', function (BreadcrumbsGenerator $crumbs,
+    $category_id,
+    $attribute_id)
+    {
+    $category = Category::findOrFail($category_id);
+    $attribute = Attribute::findOrFail($attribute_id);
+
+    $crumbs->parent('admin.adverts.categories.show',$category);
+    $crumbs->push('Show attribute: '.$attribute->name, route('admin.adverts.categories.attributes.show', [$category, $attribute]));
+});
+
+
+Breadcrumbs::register('admin.adverts.categories.attributes.edit', function (BreadcrumbsGenerator $crumbs,
+    $category_id,
+    $attribute_id)
+    {
+    $category = Category::findOrFail($category_id);
+    $attribute = Attribute::findOrFail($attribute_id);
+
+    $crumbs->parent('admin.adverts.categories.show',$category);
+    $crumbs->push('Edit attribute: '.$attribute->name, route('admin.adverts.categories.attributes.edit', [$category, $attribute]));
+});

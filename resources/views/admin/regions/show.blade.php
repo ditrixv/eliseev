@@ -2,9 +2,6 @@
 
 @section('content')
 @include('admin.regions._nav')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex flex-row">
                     <a  class="btn btn-success mr-1" href="{{$region->id.'/edit'}}" >Edit</a>
@@ -13,7 +10,6 @@
                         @method('DELETE')
                         <button class="btn btn-danger">Delete</button>
                     </form>
-                    <a  class="btn btn-primary mr-1" href="{{route('admin.regions.index')}}" >Cancel</a>
 
                 </div>
 
@@ -38,9 +34,9 @@
                         @endif
 
                         <div class="form-group">
-                        <a  class="btn btn-primary mr-1" href="{{route('admin.regions.create',['parent' => $region->id])}}" >Create</a>
+                        <a  class="btn btn-success mr-1" href="{{route('admin.regions.create',['parent' => $region->id])}}" >Add region</a>
                         </div>
-
+                </div>
                     <table class="table table-stripped" width="100%">
                         <thead>
                             <tr>
@@ -61,11 +57,5 @@
                     @endforeach
                         </tbody>
                     </table>
-                </div>
-                <div class="card-footer d-flex flex-row">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection

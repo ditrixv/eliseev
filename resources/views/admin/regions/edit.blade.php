@@ -44,7 +44,6 @@
                 </div>
                 <div class="card-footer d-flex flex-row">
                     <button type="submit" class="btn btn-success mr-1">Save</button>
-                    <a  class="btn btn-primary mr-1" href="{{route('admin.regions.index')}}" >Cancel</a>
                 </div>
                 </form>
             </div>

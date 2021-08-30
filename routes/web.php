@@ -45,7 +45,8 @@ Route::group(
                 Route::post('/last','CategoryController@last')->name('last');
                 Route::post('/up','CategoryController@up')->name('up');
                 Route::post('/down','CategoryController@down')->name('down');
-                Route::resource('/attributes','AttributeController')->except('index');
+
+                Route::resource('attributes','AttributeController')->except('index');
 
             });
 

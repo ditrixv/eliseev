@@ -18,7 +18,7 @@
                 <td> {{$category->slug}}</td>
                 <td>
                     <div class=" d-flex flex-row">
-                        <form method="post" action="{{ route('admin.adverts.categories.first', $category->id) }}" class="mr-1">
+                        <form method="post" action="{{ route('admin.adverts.categories.first', $category) }}" class="mr-1">
                             @csrf
                             <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-up"></span></button>
                         </form>    

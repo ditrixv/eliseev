@@ -1,3 +1,9 @@
+
+для дев
+composer require barryvdh/laravel-debugbar:~3.1 --dev    << версия под устаревшие лары
+composer require barryvdh/laravel-debugbar --dev
+
+
  =========== разного рода офтопы ==================
 после установки
 composer install --no-dev

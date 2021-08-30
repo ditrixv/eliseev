@@ -60,7 +60,7 @@
                         <button class="btn btn-danger">Delete</button>
                     </form>
                     @endcan
-                    <a  class="btn btn-primary mr-1" href="{{route('admin.users.index')}}" >Cancel</a>
+
                 </div>
             </div>
         </div>
