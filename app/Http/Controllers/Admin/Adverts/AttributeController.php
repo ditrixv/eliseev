@@ -30,30 +30,26 @@ class AttributeController extends Controller
 
     public function store(Request $request, $category)
     {
-        // dd($category);
-        // if(!isset($category->id))
-        //     $category = Category::findOrFail($id);
+
+        $this->validate($request,[
+            'name' => 'bail|required|string',
+            'type' => 'bail|required|string',
+            'sort' => 'bail|required|integer',
+            'variants' =>'bail|required',
+        ]);
 
         $attribute = Attribute::create([
             'name' => $request['name'],
             'type' => $request['type'],
             'required' => (bool)$request['required'],
             'variants' => array_map('trim', preg_split('#[\r\n]+#', $request['variants'])),
-            'sort' => 1,
+            'sort' => $request['sort'],
             'category_id' => $category,
         ]);
 
         $category = Category::findOrFail($category);
-        //
-        // $attribute = $category->attributes()->create([
-        //     'name' => $request['name'],
-        //     'type' => $request['type'],
-        //     'required' => (bool)$request['required'],
-        //     'variants' => array_map('trim', preg_split('#[\r\n]+#', $request['variants'])),
-        //     'sort' => $request['sort'],
-        // ]);
-       // return redirect()->route('admin.adverts.categories.attributes.show', [$category, $attribute]);
-       return redirect()->route('admin.adverts.categories.show', [$category]);
+
+        return redirect()->route('admin.adverts.categories.show', [$category]);
     }
 
 
@@ -83,6 +79,15 @@ class AttributeController extends Controller
     public function update(Request $request, $category_id, $attribute_id)
     {
         //
+
+        $this->validate($request,[
+            'name' => 'bail|required|string',
+            'type' => 'bail|required|string',
+            'sort' => 'bail|required|integer',
+            'variants' =>'bail|required',
+        ]);
+
+
         $attribute =  Attribute::findOrFail($attribute_id);
         $category = Category::findOrFail($category_id);
 
