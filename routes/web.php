@@ -20,7 +20,28 @@ Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 Route::get('/verify/{token}','Auth\RegisterController@verify')->name('register.verify');
 
+
 Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
+Route::group(
+    [
+        'prefix' => 'cabinet',
+        'as' => 'cabinet.',
+        'namespace' => 'Cabinet'
+    ],
+    function(){
+        Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
+        Route::put('/profile/update', 'ProfileController@update')->name('profile.update');
+        Route::get('/profile', 'ProfileController@index')->name('profile.index');
+    }
+);
+
+
+// Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
+// Route::get('/cabinet/profile/edit', 'Cabinet\ProfileController@edit')->name('cabinet.profile.edit');
+// Route::put('/cabinet/profile/update', 'Cabinet\ProfileController@update')->name('cabinet.profile.update');
+// Route::get('/cabinet/profile/', 'Cabinet\ProfileController@index')->name('cabinet.profile.index');
+
+
 
 //Route::get('/admin', 'Admin\HomeController@index')->name('admin');
 

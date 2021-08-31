@@ -5,6 +5,7 @@ namespace App\UseCases\Auth;
 use App\Entity\User;
 use App\Mail\VerifyMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\Auth\RegisterRequest;
 

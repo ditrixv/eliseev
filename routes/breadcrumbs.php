@@ -4,6 +4,7 @@ use App\Entity\Adverts\Category;
 use App\Entity\Adverts\Attribute;
 use App\Entity\User;
 use App\Entity\Region;
+use Illuminate\Support\Facades\Auth;
 
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
@@ -33,6 +34,26 @@ Breadcrumbs::register('cabinet', function(BreadcrumbsGenerator $crumbs){
     $crumbs->parent('home');
     $crumbs->push('Cabinet', route('cabinet'));
 });
+
+
+Breadcrumbs::register('cabinet.profile.index', function(BreadcrumbsGenerator $crumbs){
+    $crumbs->parent('home');
+    $crumbs->push('Profile', route('cabinet.profile.index'));
+});
+
+
+Breadcrumbs::register('cabinet.profile.edit', function(BreadcrumbsGenerator $crumbs){
+    $user = Auth::user();
+    $crumbs->parent('cabinet.profile.index');
+    $crumbs->push('Edit profile: '.$user->last_name, route('cabinet.profile.edit'));
+});
+
+
+// Breadcrumbs::register('cabinet.profile.edit', function(BreadcrumbsGenerator $crumbs, User $user){
+//     $crumbs->parent('cabinet');
+//     $crumbs->push($user->last_name, route('cabinet.profile.edit', $user->id));
+// });
+
 
 Breadcrumbs::register('admin.home', function(BreadcrumbsGenerator $crumbs){
     $crumbs->parent('home');

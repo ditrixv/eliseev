@@ -252,13 +252,25 @@ protected $casts = [
 ];
 
 т.о. json <-> arr <-> json   для бд  лара сделает сама
-не работает Eloquent
-извращаюсь
 
+не работает Eloquent  (имена таблиц <> модели. каталоги/атрибуты)
+извращаюсь с выборкой по $id
+напр крошки
 Breadcrumbs::register('admin.adverts.categories.attributes.create', function (BreadcrumbsGenerator $crumbs, $id) {
     $category = Category::findOrFail($id);
     $crumbs->parent('admin.adverts.categories.show',$category);
     $crumbs->push('Create', route('admin.adverts.categories.attributes.create', $category->id));
 });
+
+TODO: валидаторы в по классам
+////////////////////////////////////
+part 4/3
+
+задача user
+имя, тел, подтверждение sms
+1:14  личный кабинет
+
+
+
 
 
